@@ -120,7 +120,7 @@ function showPractice() {
         window.ctx.strokeStyle = '#FF0000';
         window.ctx.lineWidth = 5;
         window.ctx.stroke();
-    }, 2500);
+    }, 2000);
 }
 
 function startExperiment() {
