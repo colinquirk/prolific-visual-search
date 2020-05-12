@@ -114,9 +114,17 @@ function showPractice() {
     drawImages(images, xs, ys, rotations)
 
     window.ctx.fillText('Press space to continue.', 400, 700)
+
+    redCircle = setInterval(function() {
+        window.ctx.arc(163, 460, 50, 0, 2 * Math.PI);
+        window.ctx.strokeStyle = '#FF0000';
+        window.ctx.lineWidth = 5;
+        window.ctx.stroke();
+    }, 2500);
 }
 
 function startExperiment() {
+    clearTimeout(redCircle);
     writeCenterText([
         'Press space to start the experiment or refresh to see the instructions again.']);
 }
