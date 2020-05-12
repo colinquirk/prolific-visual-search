@@ -1,3 +1,6 @@
+nTrials = 10;
+trialsPerBlock = 5;
+
 function setup() {
     window.t_image = new Image(60, 60);
     window.t_image.src = '/static/img/T.png'
@@ -115,7 +118,7 @@ function showPractice() {
 
     window.ctx.fillText('Press space to continue.', 400, 700)
 
-    redCircle = setInterval(function() {
+    redCircle = setTimeout(function() {
         window.ctx.arc(163, 460, 50, 0, 2 * Math.PI);
         window.ctx.strokeStyle = '#FF0000';
         window.ctx.lineWidth = 5;
@@ -123,7 +126,7 @@ function showPractice() {
     }, 2000);
 }
 
-function startExperiment() {
+function startExperimentScreen() {
     clearTimeout(redCircle);
     writeCenterText([
         'Press space to start the experiment or refresh to see the instructions again.']);
@@ -135,7 +138,7 @@ instruct_states = [
     responseInstruct,
     showExamples,
     showPractice,
-    startExperiment
+    startExperimentScreen
 ]
 
 function instructions() {
@@ -148,12 +151,59 @@ function instructions() {
             if (state >= instruct_states.length) {
                 clearCanvas();
                 $(document).off();
+                startExperiment();
             } else {
                 clearCanvas();
                 instruct_states[state]();
             }
         }
     })
+}
+
+function generateStimuli() {
+    images = [window.t_image, window.l1_image, window.l2_image, window.l1_image, window.l2_image, window.l1_image];
+    rotations = [180, 90, 0, 270, 0, 180];
+    return [images, rotations];
+}
+
+function generateLocations() {
+    xs = [133, 355, 460, 204, 605, 515];
+    ys = [430, 520, 390, 245, 220, 555];
+    return [xs, ys];
+}
+
+function getResponse() {
+    setTimeout(function() {
+        window.trialNum += 1
+        if (window.trialNum >= nTrials) {
+            endExperiment();
+        } else {
+            displayTrial();
+        }
+    }, 1500);
+}
+
+function displayBreak() {
+    
+}
+
+function displayTrial() {
+    clearCanvas();
+    locations = generateLocations();
+    stimuli = generateStimuli();
+    setTimeout(function() {
+        drawImages(stimuli[0], locations[0], locations[1], stimuli[1]);
+        getResponse();
+    }, 1500);
+}
+
+function startExperiment() {
+    window.trialNum = 0;
+    displayTrial();
+}
+
+function endExperiment() {
+    clearCanvas();
 }
 
 function main() {
