@@ -4,18 +4,26 @@
 <head>
     <meta charset="utf-8" />
     <title>Prolific Experiment</title>
-    <script src="{{url_for('static', filename='js/experiment.js')}}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <center>
     <div>
+        <p>Resize your screen so that you can see the entire square below.</p>
         <canvas id="experiment" width="800" height="800"></canvas>
     </div>
     </center>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{url_for('static', filename='js/experiment.js')}}"></script>
 </body>
 </html>
 
-<style>    
+<style>
+    body {
+        font-family: 'Roboto';
+    }
+
     canvas {
         border: 2px solid black;
         margin: 5%;
