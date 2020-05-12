@@ -65,35 +65,40 @@ function responseInstruct() {
 }
 
 function showExamples() {
+    images = [
+        window.t_image, window.t_image, window.t_image, window.t_image,
+        window.t_blue_image, window.t_blue_image, window.t_blue_image, window.t_blue_image,
+        window.l1_image, window.l2_image, window.l1_image, window.l2_image
+    ];
+    xs = [75, 275, 475, 675,
+          75, 275, 475, 675,
+          75, 275, 475, 675];
+    ys = [150, 150, 150, 150,
+          325, 325, 325, 325,
+          550, 550, 550, 550];
+    rotations = [0, 90, 180, 270,
+                 0, 90, 180, 270,
+                 0, 180, 90, 270];
+
+    drawImages(images, xs, ys, rotations)
+
     window.ctx.fillText('Example "T"s', 400, 100)
 
-    drawRotatedImage(window.t_image, 75, 150, 0);
     window.ctx.fillText('press up', 100, 235)
-    drawRotatedImage(window.t_image, 275, 150, 90);
     window.ctx.fillText('press right', 300, 235)
-    drawRotatedImage(window.t_image, 475, 150, 180);
     window.ctx.fillText('press down', 500, 235)
-    drawRotatedImage(window.t_image, 675, 150, 270);
     window.ctx.fillText('press left', 700, 235)
 
-    drawRotatedImage(window.t_blue_image, 75, 325, 0);
     window.ctx.fillText('press up', 100, 415)
-    drawRotatedImage(window.t_blue_image, 275, 325, 90);
     window.ctx.fillText('press right', 300, 415)
-    drawRotatedImage(window.t_blue_image, 475, 325, 180);
     window.ctx.fillText('press down', 500, 415)
-    drawRotatedImage(window.t_blue_image, 675, 325, 270);
     window.ctx.fillText('press left', 700, 415)
 
     window.ctx.fillText('Example "L"s', 400, 500)
 
-    drawRotatedImage(window.l1_image, 75, 550, 0);
     window.ctx.fillText('ignore', 100, 635)
-    drawRotatedImage(window.l2_image, 275, 550, 180);
     window.ctx.fillText('ignore', 300, 635)
-    drawRotatedImage(window.l1_image, 475, 550, 90);
     window.ctx.fillText('ignore', 500, 635)
-    drawRotatedImage(window.l2_image, 675, 550, 270);
     window.ctx.fillText('ignore', 700, 635)
 
     window.ctx.fillText('Press space to continue.', 400, 725)
