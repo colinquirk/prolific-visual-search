@@ -3,7 +3,7 @@ import sqlite3
 from flask import Flask, g, redirect, render_template, request, session, url_for
 
 app = Flask(__name__)
-app.config["DEBUG"] = True
+app.config.from_object('config')
 
 DATABASE = 'subject_data.db'
 
@@ -23,11 +23,11 @@ def get_db():
     return db
 
 
-def insert_data():
+def insert_data(subject_id, data):
     sql = 'INSERT OR REPLACE INTO participants VALUES (?, ?);'
     c = get_db().cursor()
-    c.execute(sql, session['subject_id'], "")
-    c.commit()
+    c.execute(sql, (subject_id, data))
+    get_db().commit()
 
 
 @app.teardown_appcontext
@@ -59,9 +59,12 @@ def consent_failuer():
     return render_template('consent-failure.html')
 
 
-@app.route('/experiment', methods=['GET', 'PUT'])
+@app.route('/experiment', methods=['GET', 'POST'])
 def experiment():
-    return render_template('experiment.html')
+    if request.method == 'POST':
+        pass
+    else:
+        return render_template('experiment.html')
 
 
 if __name__ == '__main__':
