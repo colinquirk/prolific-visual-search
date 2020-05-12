@@ -23,6 +23,13 @@ def get_db():
     return db
 
 
+def insert_data():
+    sql = 'INSERT OR REPLACE INTO participants VALUES (?, ?);'
+    c = get_db().cursor()
+    c.execute(sql, session['subject_id'], "")
+    c.commit()
+
+
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
@@ -34,6 +41,7 @@ def close_connection(exception):
 def home():
     session['subject_id'] = request.args.get('PROLIFIC_PID')
     if session['subject_id'] is not None and len(session['subject_id']) == 24:
+        insert_data(session['subject_id'], "")
         return redirect(url_for('consent'))
     else:
         error_text = ('Could not find a valid Prolific ID in the url. '
