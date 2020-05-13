@@ -64,7 +64,10 @@ function responseInstruct() {
         'Once you find the "T" press the arrow key associated with the top of the "T."',
         'For example, if the "T" looks normal, you would press the up arrow key.',
         'If the top of the "T" is pointed to the left, you would press the left arrow key.',
+        'Alternatively, you can use W (up), A (left), S (down), and D (right).',
         'Sometimes the "T" will be blue in order to help you find it.',
+        "If you don't respond quickly enough the trial will time out.",
+        'Please respond as fast as possible.',
         'Press space to continue.']);
 }
 
@@ -88,15 +91,15 @@ function showExamples() {
 
     window.ctx.fillText('Example "T"s', 400, 100)
 
-    window.ctx.fillText('press up', 100, 235)
-    window.ctx.fillText('press right', 300, 235)
-    window.ctx.fillText('press down', 500, 235)
-    window.ctx.fillText('press left', 700, 235)
+    window.ctx.fillText('press up/W', 100, 235)
+    window.ctx.fillText('press right/D', 300, 235)
+    window.ctx.fillText('press down/S', 500, 235)
+    window.ctx.fillText('press left/A', 700, 235)
 
-    window.ctx.fillText('press up', 100, 415)
-    window.ctx.fillText('press right', 300, 415)
-    window.ctx.fillText('press down', 500, 415)
-    window.ctx.fillText('press left', 700, 415)
+    window.ctx.fillText('press up/W', 100, 415)
+    window.ctx.fillText('press right/D', 300, 415)
+    window.ctx.fillText('press down/S', 500, 415)
+    window.ctx.fillText('press left/A', 700, 415)
 
     window.ctx.fillText('Example "L"s', 400, 500)
 
@@ -109,7 +112,7 @@ function showExamples() {
 }
 
 function showPractice() {
-    window.ctx.fillText('If you saw a trial like this, you should press down.', 400, 100)
+    window.ctx.fillText('If you saw a trial like this, you should press down/S.', 400, 100)
     
     images = [window.t_image, window.l1_image, window.l2_image, window.l1_image, window.l2_image, window.l1_image];
     xs = [133, 355, 460, 204, 605, 515];
@@ -148,6 +151,7 @@ function instructions() {
 
     $(document).keypress(function(e){
         if (e.keyCode == 32) {
+            e.preventDefault();
             state += 1;
             if (state >= instruct_states.length) {
                 clearCanvas();
@@ -157,7 +161,6 @@ function instructions() {
                 clearCanvas();
                 instruct_states[state]();
             }
-            e.preventDefault();
         }
     })
 }
@@ -216,34 +219,45 @@ function generateLocations() {
     return [xs, ys]
 }
 
-function getResponse() {
-    setTimeout(function() {
-        window.trialNum += 1
-        if (window.trialNum >= nTrials) {
-            endExperiment();
-        } else if (window.trialNum % trialsPerBlock == 0) {
-            displayBreak();
-        } else {
-            displayTrial();
-        }
-    }, 1500);
+function saveData() {
+    
 }
 
+function getResponse() {
+    $(document).keypress(function(e) {
+        if ([37, 38, 39, 40, 97, 100, 115, 119].includes(e.keyCode)) {
+            e.preventDefault();
+            $(document).off();
+            clearCanvas();
+            window.trialNum += 1
+            saveData();
+            if (window.trialNum >= nTrials) {
+                endExperiment();
+            } else if (window.trialNum % trialsPerBlock == 0) {
+                displayBreak();
+            } else {
+                displayTrial();
+            }
+        }
+    }
+)}
+
 function displayBreak() {
-    clearCanvas();
     writeCenterText([
         'Take a short break if you would like to.',
         'Press space to continue.'
     ])
     $(document).keypress(function(e){
         if (e.keyCode == 32) {
+            e.preventDefault();
+            $(document).off();
+            clearCanvas();
             displayTrial();
         }
     })
 }
 
 function displayTrial() {
-    clearCanvas();
     locations = generateLocations();
     stimuli = generateStimuli();
     setTimeout(function() {
