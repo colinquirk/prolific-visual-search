@@ -163,8 +163,25 @@ function instructions() {
 }
 
 function generateStimuli() {
-    images = [window.t_image, window.l1_image, window.l2_image, window.l1_image, window.l2_image, window.l1_image];
-    rotations = [180, 90, 0, 270, 0, 180];
+    possible_rotations = [0, 90, 180, 270];
+    possible_targets = [window.t_image, window.t_blue_image];
+    possible_distractors = [window.l1_image, window.l2_image];
+
+    images = [];
+    rotations = [];
+
+    for (i=0; i < setSize; i++) {
+        if (i == 0) {
+            target = possible_targets[Math.floor(Math.random() * possible_targets.length)];
+            images.push(target);
+        } else {
+            distractor = possible_distractors[Math.floor(Math.random() * possible_distractors.length)];
+            images.push(distractor);
+        }
+        rotation = possible_rotations[Math.floor(Math.random() * possible_rotations.length)];
+        rotations.push(rotation);
+    }
+
     return [images, rotations];
 }
 
@@ -204,6 +221,8 @@ function getResponse() {
         window.trialNum += 1
         if (window.trialNum >= nTrials) {
             endExperiment();
+        } else if (window.trialNum % trialsPerBlock == 0) {
+            displayBreak();
         } else {
             displayTrial();
         }
@@ -211,7 +230,16 @@ function getResponse() {
 }
 
 function displayBreak() {
-    
+    clearCanvas();
+    writeCenterText([
+        'Take a short break if you would like to.',
+        'Press space to continue.'
+    ])
+    $(document).keypress(function(e){
+        if (e.keyCode == 32) {
+            displayTrial();
+        }
+    })
 }
 
 function displayTrial() {
