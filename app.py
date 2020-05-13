@@ -66,7 +66,12 @@ def experiment():
 
 @app.route('/save-data', methods=['POST'])
 def save_data():
-    insert_data(session['subject_id'], request.data)
+    try:
+        insert_data(session['subject_id'], request.data)
+    except KeyError:
+        error_text = ("Couldn't save your data."
+                      "Do you have cookies disabled or an adblocker running?")
+        return render_template('error.html', error_text=error_text)
     return 'OK'
 
 
