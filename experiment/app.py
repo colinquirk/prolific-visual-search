@@ -1,4 +1,3 @@
-import os
 import sqlite3
 
 from flask import Flask, g, redirect, render_template, request, session, url_for
@@ -78,5 +77,4 @@ def save_data():
 
 
 if __name__ == '__main__':
-    init_db()
     app.run()
