@@ -1,5 +1,6 @@
 nTrials = 10;
 trialsPerBlock = 5;
+setSize = 6;
 
 function setup() {
     window.t_image = new Image(60, 60);
@@ -156,6 +157,7 @@ function instructions() {
                 clearCanvas();
                 instruct_states[state]();
             }
+            e.preventDefault();
         }
     })
 }
@@ -166,10 +168,35 @@ function generateStimuli() {
     return [images, rotations];
 }
 
+function getRandInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+function checkDistance(x1, y1, x2, y2) {
+    return Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2))
+}
+
 function generateLocations() {
-    xs = [133, 355, 460, 204, 605, 515];
-    ys = [430, 520, 390, 245, 220, 555];
-    return [xs, ys];
+    xs = [getRandInt(100, 700)];
+    ys = [getRandInt(100, 700)];
+    locations = [[xs[0], ys[0]]];
+    while (locations.length < setSize) {
+        newx = getRandInt(100, 700);
+        newy = getRandInt(100, 700);
+        badLoc = false
+        for (i=0; i<locations.length; i++) {
+            if (checkDistance(locations[i][0], locations[i][1], newx, newy) < 150) {
+                badLoc = true
+                break
+            }
+        }
+        if (!badLoc) {
+            locations.push([newx, newy])
+            xs.push(newx);
+            ys.push(newy);
+        }
+    }
+    return [xs, ys]
 }
 
 function getResponse() {
