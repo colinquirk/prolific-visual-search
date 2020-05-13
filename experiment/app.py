@@ -3,7 +3,8 @@ import sqlite3
 from flask import Flask, g, redirect, render_template, request, session, url_for
 
 app = Flask(__name__)
-app.config.from_object('config')
+app.config['DEBUG'] = False
+app.config['SECRET_KEY'] = 'gh948ghhg2498gh'
 
 DATABASE = 'subject_data.db'
 

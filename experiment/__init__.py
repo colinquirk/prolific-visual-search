@@ -1,5 +1,5 @@
-import app
+from .app import app
 
 
 def getApp():
-    return app.app
+    return app
