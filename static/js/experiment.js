@@ -16,6 +16,8 @@ function setup() {
     window.ctx = canvas.getContext("2d");
     window.ctx.font = "20px Roboto";
     window.ctx.textAlign = "center";
+
+    window.subject_data = [];
 }
 
 function clearCanvas() {
@@ -220,24 +222,72 @@ function generateLocations() {
 }
 
 function saveData() {
-    
+    window.subject_data.push(trial)
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", '/save-data', true);
+    xhr.setRequestHeader("Content-Type", "application/json"); 
+    xhr.send(JSON.stringify(window.subject_data));
 }
 
-function getResponse() {
-    $(document).keypress(function(e) {
-        if ([37, 38, 39, 40, 97, 100, 115, 119].includes(e.keyCode)) {
+function getCode(key) {
+    if ([38, 87].includes(key)) {
+        return 'up';
+    } else if ([37, 65].includes(key)) {
+        return 'left';
+    } else if ([39, 68].includes(key)) {
+        return 'right';
+    } else {
+        return 'down';
+    }
+}
+
+function getCRESP(rotation) {
+    if (rotation == 0) {
+        return 'up';
+    } else if (rotation == 270) {
+        return 'left';
+    } else if (rotation == 90) {
+        return 'right';
+    } else {
+        return 'down';
+    }
+}
+
+function doNextState() {
+    if (window.trialNum >= nTrials) {
+        endExperiment();
+    } else if (window.trialNum % trialsPerBlock == 0) {
+        displayBreak();
+    } else {
+        displayTrial();
+    }
+}
+
+function getResponse(trial) {
+    rtStart = new Date();
+    trialTimeout = setTimeout(function() {
+        clearCanvas();
+        window.trialNum += 1;
+        trial.response = "NA";
+        trial.accuracy = false;
+        trial.reaction_time = "NA"
+        saveData(trial);
+        doNextState();
+    }, 3000)
+
+    $(document).keydown(function(e) {
+        if ([37, 38, 39, 40, 65, 68, 83, 87].includes(e.keyCode)) {
+            rtEnd = new Date()
             e.preventDefault();
             $(document).off();
+            clearTimeout(trialTimeout);
             clearCanvas();
-            window.trialNum += 1
-            saveData();
-            if (window.trialNum >= nTrials) {
-                endExperiment();
-            } else if (window.trialNum % trialsPerBlock == 0) {
-                displayBreak();
-            } else {
-                displayTrial();
-            }
+            window.trialNum += 1;
+            trial.response = getCode(e.keyCode);
+            trial.accuracy = trial.response == trial.correct_response;
+            trial.reaction_time = rtEnd - rtStart;
+            saveData(trial);
+            doNextState();
         }
     }
 )}
@@ -260,9 +310,24 @@ function displayBreak() {
 function displayTrial() {
     locations = generateLocations();
     stimuli = generateStimuli();
+
+    trial = {};
+    trial.target_color = (stimuli[0][0] == window.t_blue_image) ? "blue" : "black";
+    trial.target_loc_x = locations[0][0];
+    trial.target_loc_y = locations[1][0];
+    trial.target_rotation = stimuli[1][0]
+    trial.distractor_locs = [locations[0].slice(1), locations[1].slice(1)]
+    trial.distractor_rotations = stimuli[1].slice(1)
+    trial.distractor_type = []
+    trial.correct_response = getCRESP(trial['target_rotation']);
+
+    for (i=1; i<6; i++) {
+        trial.distractor_type.push((stimuli[0][i] == window.l1_image) ? "L1" : "L2")
+    }
+
     setTimeout(function() {
         drawImages(stimuli[0], locations[0], locations[1], stimuli[1]);
-        getResponse();
+        getResponse(trial);
     }, 1500);
 }
 

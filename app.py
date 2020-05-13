@@ -59,12 +59,15 @@ def consent_failuer():
     return render_template('consent-failure.html')
 
 
-@app.route('/experiment', methods=['GET', 'POST'])
+@app.route('/experiment', methods=['GET'])
 def experiment():
-    if request.method == 'POST':
-        pass
-    else:
-        return render_template('experiment.html')
+    return render_template('experiment.html')
+
+
+@app.route('/save-data', methods=['POST'])
+def save_data():
+    insert_data(session['subject_id'], request.data)
+    return 'OK'
 
 
 if __name__ == '__main__':
