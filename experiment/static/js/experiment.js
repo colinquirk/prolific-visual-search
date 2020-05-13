@@ -114,18 +114,18 @@ function showExamples() {
 }
 
 function showPractice() {
-    window.ctx.fillText('If you saw a trial like this, you should press down/S.', 400, 100)
+    window.ctx.fillText('If you saw a trial like this, you should press down/S.', 300, 100)
     
     images = [window.t_image, window.l1_image, window.l2_image, window.l1_image, window.l2_image, window.l1_image];
-    xs = [144, 322, 252, 433, 285, 301];
-    ys = [432, 132, 231, 421, 321, 111];
+    xs = [144, 322, 252, 533, 285, 301];
+    ys = [432, 132, 231, 321, 321, 111];
     rotations = [180, 90, 0, 270, 0, 180];
     drawImages(images, xs, ys, rotations)
 
-    window.ctx.fillText('Press space to continue.', 400, 700)
+    window.ctx.fillText('Press space to continue.', 300, 500)
 
     redCircle = setTimeout(function() {
-        window.ctx.arc(144, 432, 50, 0, 2 * Math.PI);
+        window.ctx.arc(174, 462, 50, 0, 2 * Math.PI);
         window.ctx.strokeStyle = '#FF0000';
         window.ctx.lineWidth = 5;
         window.ctx.stroke();
