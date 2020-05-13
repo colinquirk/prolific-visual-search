@@ -79,9 +79,9 @@ function showExamples() {
         window.t_blue_image, window.t_blue_image, window.t_blue_image, window.t_blue_image,
         window.l1_image, window.l2_image, window.l1_image, window.l2_image
     ];
-    xs = [150, 250, 350, 450,
-          150, 250, 350, 450,
-          150, 250, 350, 450];
+    xs = [120, 220, 320, 420,
+          120, 220, 320, 420,
+          120, 220, 320, 420];
     ys = [100, 100, 100, 100,
           200, 200, 200, 200,
           400, 400, 400, 400];
@@ -91,7 +91,7 @@ function showExamples() {
 
     drawImages(images, xs, ys, rotations)
 
-    window.ctx.fillText('Example "T"s', 300, 25)
+    window.ctx.fillText('Example "T"s', 300, 75)
 
     window.ctx.fillText('press up/W', 150, 175)
     window.ctx.fillText('press right/D', 250, 175)
@@ -103,14 +103,14 @@ function showExamples() {
     window.ctx.fillText('press down/S', 350, 275)
     window.ctx.fillText('press left/A', 450, 275)
 
-    window.ctx.fillText('Example "L"s', 300, 400)
+    window.ctx.fillText('Example "L"s', 300, 375)
 
     window.ctx.fillText('ignore', 150, 475)
     window.ctx.fillText('ignore', 250, 475)
     window.ctx.fillText('ignore', 350, 475)
     window.ctx.fillText('ignore', 450, 475)
 
-    window.ctx.fillText('Press space to continue.', 300, 575)
+    window.ctx.fillText('Press space to continue.', 300, 550)
 }
 
 function showPractice() {
