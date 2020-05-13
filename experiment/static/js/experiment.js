@@ -14,7 +14,7 @@ function setup() {
 
     window.canvas = document.getElementById("experiment");
     window.ctx = canvas.getContext("2d");
-    window.ctx.font = "20px Roboto";
+    window.ctx.font = "16px Roboto";
     window.ctx.textAlign = "center";
 
     window.subject_data = [];
@@ -26,8 +26,8 @@ function clearCanvas() {
 
 function writeCenterText(text) {
     for (i=0; i<text.length; i++) {
-        offset = (window.canvas.height / 2) - ((text.length - 1) * 50);
-        height = (100 * i) + offset;
+        offset = (window.canvas.height / 2) - ((text.length - 1) * 25);
+        height = (50 * i) + offset;
         window.ctx.fillText(text[i], window.canvas.width / 2, height);
     }
 }
@@ -79,9 +79,9 @@ function showExamples() {
         window.t_blue_image, window.t_blue_image, window.t_blue_image, window.t_blue_image,
         window.l1_image, window.l2_image, window.l1_image, window.l2_image
     ];
-    xs = [50, 250, 350, 450,
-          50, 250, 350, 450,
-          50, 250, 350, 450];
+    xs = [200, 300, 400, 500,
+          200, 300, 400, 500,
+          200, 300, 400, 500];
     ys = [100, 100, 100, 100,
           200, 200, 200, 200,
           400, 400, 400, 400];
@@ -91,26 +91,26 @@ function showExamples() {
 
     drawImages(images, xs, ys, rotations)
 
-    window.ctx.fillText('Example "T"s', 250, 25)
+    window.ctx.fillText('Example "T"s', 300, 25)
 
-    window.ctx.fillText('press up/W', 50, 150)
-    window.ctx.fillText('press right/D', 250, 150)
-    window.ctx.fillText('press down/S', 350, 150)
-    window.ctx.fillText('press left/A', 450, 150)
+    window.ctx.fillText('press up/W', 200, 175)
+    window.ctx.fillText('press right/D', 300, 175)
+    window.ctx.fillText('press down/S', 400, 175)
+    window.ctx.fillText('press left/A', 500, 175)
 
-    window.ctx.fillText('press up/W', 50, 250)
-    window.ctx.fillText('press right/D', 250, 250)
-    window.ctx.fillText('press down/S', 350, 250)
-    window.ctx.fillText('press left/A', 450, 250)
+    window.ctx.fillText('press up/W', 200, 275)
+    window.ctx.fillText('press right/D', 300, 275)
+    window.ctx.fillText('press down/S', 400, 275)
+    window.ctx.fillText('press left/A', 500, 275)
 
-    window.ctx.fillText('Example "L"s', 250, 400)
+    window.ctx.fillText('Example "L"s', 300, 400)
 
-    window.ctx.fillText('ignore', 50, 450)
-    window.ctx.fillText('ignore', 250, 450)
-    window.ctx.fillText('ignore', 350, 450)
-    window.ctx.fillText('ignore', 450, 450)
+    window.ctx.fillText('ignore', 200, 475)
+    window.ctx.fillText('ignore', 300, 475)
+    window.ctx.fillText('ignore', 400, 475)
+    window.ctx.fillText('ignore', 500, 475)
 
-    window.ctx.fillText('Press space to continue.', 250, 475)
+    window.ctx.fillText('Press space to continue.', 300, 575)
 }
 
 function showPractice() {
