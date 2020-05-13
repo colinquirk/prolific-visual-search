@@ -18,7 +18,7 @@ def init_db():
         db.commit()
 
 
-def get_db(): 
+def get_db():
     db = getattr(g, '_database', None)
     if db is None:
         db = g._database = sqlite3.connect(DATABASE)
@@ -78,6 +78,5 @@ def save_data():
 
 
 if __name__ == '__main__':
-    if not os.path.exists(DATABASE):
-        init_db()
+    init_db()
     app.run()
