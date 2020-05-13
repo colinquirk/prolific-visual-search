@@ -79,53 +79,53 @@ function showExamples() {
         window.t_blue_image, window.t_blue_image, window.t_blue_image, window.t_blue_image,
         window.l1_image, window.l2_image, window.l1_image, window.l2_image
     ];
-    xs = [75, 275, 475, 675,
-          75, 275, 475, 675,
-          75, 275, 475, 675];
-    ys = [150, 150, 150, 150,
-          325, 325, 325, 325,
-          550, 550, 550, 550];
+    xs = [50, 250, 350, 450,
+          50, 250, 350, 450,
+          50, 250, 350, 450];
+    ys = [100, 100, 100, 100,
+          200, 200, 200, 200,
+          400, 400, 400, 400];
     rotations = [0, 90, 180, 270,
                  0, 90, 180, 270,
                  0, 180, 90, 270];
 
     drawImages(images, xs, ys, rotations)
 
-    window.ctx.fillText('Example "T"s', 400, 100)
+    window.ctx.fillText('Example "T"s', 250, 25)
 
-    window.ctx.fillText('press up/W', 100, 235)
-    window.ctx.fillText('press right/D', 300, 235)
-    window.ctx.fillText('press down/S', 500, 235)
-    window.ctx.fillText('press left/A', 700, 235)
+    window.ctx.fillText('press up/W', 50, 150)
+    window.ctx.fillText('press right/D', 250, 150)
+    window.ctx.fillText('press down/S', 350, 150)
+    window.ctx.fillText('press left/A', 450, 150)
 
-    window.ctx.fillText('press up/W', 100, 415)
-    window.ctx.fillText('press right/D', 300, 415)
-    window.ctx.fillText('press down/S', 500, 415)
-    window.ctx.fillText('press left/A', 700, 415)
+    window.ctx.fillText('press up/W', 50, 250)
+    window.ctx.fillText('press right/D', 250, 250)
+    window.ctx.fillText('press down/S', 350, 250)
+    window.ctx.fillText('press left/A', 450, 250)
 
-    window.ctx.fillText('Example "L"s', 400, 500)
+    window.ctx.fillText('Example "L"s', 250, 400)
 
-    window.ctx.fillText('ignore', 100, 635)
-    window.ctx.fillText('ignore', 300, 635)
-    window.ctx.fillText('ignore', 500, 635)
-    window.ctx.fillText('ignore', 700, 635)
+    window.ctx.fillText('ignore', 50, 450)
+    window.ctx.fillText('ignore', 250, 450)
+    window.ctx.fillText('ignore', 350, 450)
+    window.ctx.fillText('ignore', 450, 450)
 
-    window.ctx.fillText('Press space to continue.', 400, 725)
+    window.ctx.fillText('Press space to continue.', 250, 475)
 }
 
 function showPractice() {
     window.ctx.fillText('If you saw a trial like this, you should press down/S.', 400, 100)
     
     images = [window.t_image, window.l1_image, window.l2_image, window.l1_image, window.l2_image, window.l1_image];
-    xs = [133, 355, 460, 204, 605, 515];
-    ys = [430, 520, 390, 245, 220, 555];
+    xs = [144, 322, 252, 433, 285, 301];
+    ys = [432, 132, 231, 421, 321, 111];
     rotations = [180, 90, 0, 270, 0, 180];
     drawImages(images, xs, ys, rotations)
 
     window.ctx.fillText('Press space to continue.', 400, 700)
 
     redCircle = setTimeout(function() {
-        window.ctx.arc(163, 460, 50, 0, 2 * Math.PI);
+        window.ctx.arc(144, 432, 50, 0, 2 * Math.PI);
         window.ctx.strokeStyle = '#FF0000';
         window.ctx.lineWidth = 5;
         window.ctx.stroke();
@@ -199,12 +199,12 @@ function checkDistance(x1, y1, x2, y2) {
 }
 
 function generateLocations() {
-    xs = [getRandInt(100, 700)];
-    ys = [getRandInt(100, 700)];
+    xs = [getRandInt(100, 500)];
+    ys = [getRandInt(100, 500)];
     locations = [[xs[0], ys[0]]];
     while (locations.length < setSize) {
-        newx = getRandInt(100, 700);
-        newy = getRandInt(100, 700);
+        newx = getRandInt(100, 500);
+        newy = getRandInt(100, 500);
         badLoc = false
         for (i=0; i<locations.length; i++) {
             if (checkDistance(locations[i][0], locations[i][1], newx, newy) < 150) {
