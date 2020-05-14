@@ -228,7 +228,7 @@ function generateLocations() {
     return [xs, ys]
 }
 
-function saveData() {
+function saveData(trial) {
     window.subject_data.push(trial);
     $.post('save-data', {'data': JSON.stringify(window.subject_data)})
 }
