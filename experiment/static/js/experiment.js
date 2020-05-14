@@ -1,5 +1,5 @@
-nTrials = 10;
-trialsPerBlock = 5;
+nTrials = 400;
+trialsPerBlock = 50;
 setSize = 6;
 
 function setup() {
