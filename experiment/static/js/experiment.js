@@ -1,4 +1,4 @@
-nTrials = 500;
+nTrials = 600;
 trialsPerBlock = 50;
 setSize = 6;
 
