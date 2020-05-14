@@ -118,14 +118,14 @@ function showPractice() {
     
     images = [window.t_image, window.l1_image, window.l2_image, window.l1_image, window.l2_image, window.l1_image];
     xs = [144, 322, 252, 473, 285, 101];
-    ys = [432, 132, 231, 321, 321, 111];
+    ys = [402, 132, 231, 321, 321, 111];
     rotations = [180, 90, 0, 270, 0, 180];
     drawImages(images, xs, ys, rotations)
 
     window.ctx.fillText('Press space to continue.', 300, 500)
 
     redCircle = setTimeout(function() {
-        window.ctx.arc(174, 462, 50, 0, 2 * Math.PI);
+        window.ctx.arc(174, 432, 50, 0, 2 * Math.PI);
         window.ctx.strokeStyle = '#FF0000';
         window.ctx.lineWidth = 5;
         window.ctx.stroke();
