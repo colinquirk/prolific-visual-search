@@ -55,8 +55,8 @@ def experiment():
 @app.route('/save-data', methods=['POST'])
 def save_data():
     try:
-        print(request.form.to_dict())
-        insert_data(session['subject_id'], request.json)
+        form = request.form.to_dict()
+        insert_data(session['subject_id'], form['data'])
     except KeyError:
         error_text = ("Couldn't save your data."
                       "Do you have cookies disabled or an adblocker running?")
