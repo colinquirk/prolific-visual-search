@@ -1,4 +1,4 @@
-nTrials = 400;
+nTrials = 500;
 trialsPerBlock = 50;
 setSize = 6;
 
@@ -311,6 +311,7 @@ function displayTrial() {
     stimuli = generateStimuli();
 
     trial = {};
+    trial.trialNum = window.trialNum;
     trial.target_color = (stimuli[0][0] == window.t_blue_image) ? "blue" : "black";
     trial.target_loc_x = locations[0][0];
     trial.target_loc_y = locations[1][0];
