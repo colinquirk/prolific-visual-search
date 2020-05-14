@@ -314,10 +314,11 @@ function displayTrial() {
     trial.target_color = (stimuli[0][0] == window.t_blue_image) ? "blue" : "black";
     trial.target_loc_x = locations[0][0];
     trial.target_loc_y = locations[1][0];
-    trial.target_rotation = stimuli[1][0]
-    trial.distractor_locs = [locations[0].slice(1), locations[1].slice(1)]
-    trial.distractor_rotations = stimuli[1].slice(1)
-    trial.distractor_type = []
+    trial.target_rotation = stimuli[1][0];
+    trial.distractor_xs = locations[0].slice(1);
+    trial.distractor_ys = locations[1].slice(1);
+    trial.distractor_rotations = stimuli[1].slice(1);
+    trial.distractor_type = [];
     trial.correct_response = getCRESP(trial['target_rotation']);
 
     for (i=1; i<6; i++) {
