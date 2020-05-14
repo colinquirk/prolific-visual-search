@@ -228,10 +228,6 @@ function generateLocations() {
     return [xs, ys]
 }
 
-for (j=0; j<1000; j++) {
-    generateLocations()
-}
-
 function saveData() {
     window.subject_data.push(trial);
     $.post('save-data', {'data': JSON.stringify(window.subject_data)})
