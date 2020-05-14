@@ -204,6 +204,7 @@ function generateLocations() {
     ys = [getRandInt(100, 500)];
     locations = [[xs[0], ys[0]]];
     while (locations.length < setSize) {
+        console.log('while')
         i += 1;
         newx = getRandInt(100, 500);
         newy = getRandInt(100, 500);
@@ -220,11 +221,17 @@ function generateLocations() {
             ys.push(newy);
         }
         if (i == 200) {
+            console.log('bad')
             locations = [[xs[0], ys[0]]];
             i=0;
         }
     }
     return [xs, ys]
+}
+
+for (i=0; i<1000; i++) {
+    console.log(i);
+    generateLocations()
 }
 
 function saveData() {
