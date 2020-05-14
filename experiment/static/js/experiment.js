@@ -6,7 +6,7 @@ function setup() {
     window.t_image = new Image(60, 60);
     window.t_image.src = '/static/img/T.png'
     window.t_blue_image = new Image(60, 60);
-    window.tprogressBar_blue_image.src = '/static/img/T_blue.png'
+    window.t_blue_image.src = '/static/img/T_blue.png'
     window.l1_image = new Image(60, 60);
     window.l1_image.src = '/static/img/L1.png'
     window.l2_image = new Image(60, 60);
