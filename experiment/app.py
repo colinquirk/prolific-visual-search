@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = 'gh948ghhg2498gh'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
-from models import Participant
+from .models import Participant
 
 
 
