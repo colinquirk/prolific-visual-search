@@ -1,12 +1,11 @@
 from .app import db
-from sqlalchemy.dialects.postgresql import JSON
 
 
 class Participant(db.Model):
     __tablename__ = 'participants'
 
     pid = db.Column(db.String(), primary_key=True)
-    data = db.Column(JSON)
+    data = db.Column(db.String())
 
     def __init__(self, pid, data):
         self.pid = pid
