@@ -14,13 +14,10 @@ from .models import Participant
 
 def insert_data(subject_id, data):
     p = Participant.query.filter_by(pid=subject_id).first()
-    print(subject_id)
     if not p:
         p = Participant(subject_id, data)
         db.session.add(p)
     else:
-        print("data")
-        print(data)
         p.data = data
     db.session.commit()
 
