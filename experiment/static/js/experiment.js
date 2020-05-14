@@ -117,7 +117,7 @@ function showPractice() {
     window.ctx.fillText('If you saw a trial like this, you should press down/S.', 300, 100)
     
     images = [window.t_image, window.l1_image, window.l2_image, window.l1_image, window.l2_image, window.l1_image];
-    xs = [144, 322, 252, 533, 285, 301];
+    xs = [144, 322, 252, 473, 285, 101];
     ys = [432, 132, 231, 321, 321, 111];
     rotations = [180, 90, 0, 270, 0, 180];
     drawImages(images, xs, ys, rotations)
