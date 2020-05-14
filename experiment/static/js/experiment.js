@@ -349,7 +349,7 @@ function endExperiment() {
 }
 
 function progress() {
-    newWidth = Math.min(5, (window.trialNum / nTrials) * 100)
+    newWidth = Math.max(5, (window.trialNum / nTrials) * 100)
     $("#progressBar").css({'width': newWidth})
 }
 
