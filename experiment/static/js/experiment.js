@@ -199,10 +199,12 @@ function checkDistance(x1, y1, x2, y2) {
 }
 
 function generateLocations() {
+    i = 0;
     xs = [getRandInt(100, 500)];
     ys = [getRandInt(100, 500)];
     locations = [[xs[0], ys[0]]];
     while (locations.length < setSize) {
+        i += 1;
         newx = getRandInt(100, 500);
         newy = getRandInt(100, 500);
         badLoc = false
@@ -216,6 +218,9 @@ function generateLocations() {
             locations.push([newx, newy])
             xs.push(newx);
             ys.push(newy);
+        }
+        if (i == 1000) {
+            locations = [[xs[0], ys[0]]];
         }
     }
     return [xs, ys]
