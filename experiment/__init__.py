@@ -1,8 +1,5 @@
-from .app import app, init_db
+from .app import app
 
 
 def getApp():
     return app
-
-
-init_db()

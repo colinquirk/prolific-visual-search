@@ -12,12 +12,10 @@ db = SQLAlchemy(app)
 from .models import Participant
 
 
-
 def insert_data(subject_id, data):
     p = Participant(subject_id, data)
     db.session.add(p)
     db.session.commit()
-
 
 
 @app.route('/', methods=['GET'])
