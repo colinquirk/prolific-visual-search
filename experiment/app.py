@@ -1,41 +1,23 @@
-import sqlite3
+import os
 
-from flask import Flask, g, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, render_template, request, session, url_for
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['DEBUG'] = False
 app.config['SECRET_KEY'] = 'gh948ghhg2498gh'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+db = SQLAlchemy(app)
 
-DATABASE = 'subject_data.db'
+from models import Participant
 
-
-def init_db():
-    with app.app_context():
-        db = get_db()
-        with app.open_resource('schema.sql', mode='r') as f:
-            db.cursor().executescript(f.read())
-        db.commit()
-
-
-def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-    return db
 
 
 def insert_data(subject_id, data):
-    sql = 'INSERT OR REPLACE INTO participants VALUES (?, ?);'
-    c = get_db().cursor()
-    c.execute(sql, (subject_id, data))
-    get_db().commit()
+    p = Participant(subject_id, data)
+    db.session.add(p)
+    db.session.commit()
 
-
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
 
 
 @app.route('/', methods=['GET'])
