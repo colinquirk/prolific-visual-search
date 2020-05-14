@@ -124,7 +124,7 @@ function showPractice() {
 
     window.ctx.fillText('Press space to continue.', 300, 500)
 
-    var redCircle = setTimeout(function() {
+    redCircle = setTimeout(function() {
         window.ctx.arc(174, 432, 50, 0, 2 * Math.PI);
         window.ctx.strokeStyle = '#FF0000';
         window.ctx.lineWidth = 5;
