@@ -6,7 +6,7 @@ function setup() {
     window.t_image = new Image(60, 60);
     window.t_image.src = '/static/img/T.png'
     window.t_blue_image = new Image(60, 60);
-    window.t_blue_image.src = '/static/img/T_blue.png'
+    window.tprogressBar_blue_image.src = '/static/img/T_blue.png'
     window.l1_image = new Image(60, 60);
     window.l1_image.src = '/static/img/L1.png'
     window.l2_image = new Image(60, 60);
@@ -269,6 +269,7 @@ function getResponse(trial) {
         trial.accuracy = false;
         trial.reaction_time = "NA"
         saveData(trial);
+        progress();
         doNextState();
     }, 3000)
 
@@ -284,6 +285,7 @@ function getResponse(trial) {
             trial.accuracy = trial.response == trial.correct_response;
             trial.reaction_time = rtEnd - rtStart;
             saveData(trial);
+            progress();
             doNextState();
         }
     }
@@ -344,6 +346,11 @@ function endExperiment() {
     setTimeout(function() {
         window.location.href = "https://app.prolific.co/submissions/complete?cc=642EC0D2";
     }, 10000)
+}
+
+function progress() {
+    newWidth = Math.min(5, (window.trialNum / nTrials) * 100)
+    $("#progressBar").css({'width': newWidth})
 }
 
 function main() {
