@@ -223,7 +223,7 @@ function generateLocations() {
 
 function saveData() {
     window.subject_data.push(trial);
-    $.post('save-data', {'data': JSON.stringify(window.subject_data)})
+    $.post('save-data', JSON.stringify(window.subject_data))
 }
 
 function getCode(key) {
@@ -339,7 +339,7 @@ function endExperiment() {
     clearCanvas();
     writeCenterText(['Saving the data, please wait a moment...'])
     setInterval(function() {
-        $.post('save-data', {'data': JSON.stringify(window.subject_data)}, function(response) {
+        $.post('save-data', JSON.stringify(window.subject_data), function(response) {
             window.location.href = "https://app.prolific.co/submissions/complete?cc=642EC0D2";
         })
     }, 1000);
