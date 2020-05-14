@@ -219,8 +219,9 @@ function generateLocations() {
             xs.push(newx);
             ys.push(newy);
         }
-        if (i == 1000) {
+        if (i == 200) {
             locations = [[xs[0], ys[0]]];
+            i=0;
         }
     }
     return [xs, ys]
