@@ -13,10 +13,13 @@ from .models import Participant
 
 
 def insert_data(subject_id, data):
-    p = Participant(subject_id, data)
-    db.session.add(p)
+    p = Participant.query.filter_by(pid=subject_id).first()
+    if not p:
+        p = Participant(subject_id, data)
+        db.session.add(p)
+    else:
+        p.data = data
     db.session.commit()
-
 
 @app.route('/', methods=['GET'])
 def home():
