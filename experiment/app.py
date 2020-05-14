@@ -55,9 +55,7 @@ def experiment():
 @app.route('/save-data', methods=['POST'])
 def save_data():
     try:
-        print(request)
-        print(request.form)
-        print(request.data)
+        print(request.form.to_dict())
         insert_data(session['subject_id'], request.data)
     except KeyError:
         error_text = ("Couldn't save your data."
