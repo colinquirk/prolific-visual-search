@@ -201,21 +201,21 @@ function checkDistance(x1, y1, x2, y2) {
 
 function generateLocations() {
     console.log('generate');
-    var i = 0;
+    var counter = 0;
     var xs = [getRandInt(100, 500) - 30];
     var ys = [getRandInt(100, 500) - 30];
     var locations = [[xs[0], ys[0]]];
     while (locations.length < setSize) {
-        console.log(i);
-        i += 1;
-        if (i >= 50) {
+        console.log(counter);
+        counter += 1;
+        if (counter >= 50) {
             console.log('starting over');
             console.log(xs);
             console.log(ys);
             locations = [[xs[0], ys[0]]];
             xs = xs[0];
             ys = ys[0];
-            i = 0;
+            counter = 0;
         }
         var newx = getRandInt(100, 500) - 30;
         var newy = getRandInt(100, 500) - 30;
