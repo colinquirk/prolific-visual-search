@@ -49,9 +49,9 @@ def save_data():
     try:
         form = request.form.to_dict()
         if form['response'] == "":
-            form.['response'] = None
-        if form.['reaction_time'] == "":
-            form.['reaction_time'] = None
+            form['response'] = None
+        if form['reaction_time'] == "":
+            form['reaction_time'] = None
 
         print(form)
         insert_data(session['subject_id'], **form)
