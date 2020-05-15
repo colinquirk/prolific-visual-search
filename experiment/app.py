@@ -9,16 +9,12 @@ app.config['SECRET_KEY'] = 'gh948ghhg2498gh'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
-from .models import Participant
+from .models import Trial
 
 
-def insert_data(subject_id, data):
-    p = Participant.query.filter_by(pid=subject_id).first()
-    if not p:
-        p = Participant(subject_id, data)
-        db.session.add(p)
-    else:
-        p.data = data
+def insert_data(pid, **kwargs):
+    trial = Trial(pid, **kwargs)
+    db.session.add(trial)
     db.session.commit()
 
 
@@ -53,7 +49,8 @@ def experiment():
 def save_data():
     try:
         form = request.form.to_dict()
-        insert_data(session['subject_id'], form['data'])
+        print(form)
+        insert_data(session['subject_id'], **form)
     except KeyError:
         error_text = ("Couldn't save your data."
                       "Do you have cookies disabled or an adblocker running?")

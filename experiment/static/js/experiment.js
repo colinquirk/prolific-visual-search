@@ -16,8 +16,6 @@ function setup() {
     window.ctx = canvas.getContext("2d");
     window.ctx.font = "16px Roboto";
     window.ctx.textAlign = "center";
-
-    window.subject_data = [];
 }
 
 function clearCanvas() {
@@ -230,8 +228,11 @@ function generateLocations() {
 }
 
 function saveData(trial) {
-    window.subject_data.push(trial);
-    $.post('save-data', {'data': JSON.stringify(window.subject_data)})
+    trial.distractor_xs = JSON.stringify(trial.distractor_xs);
+    trial.distractor_ys = JSON.stringify(trial.distractor_ys);
+    trial.distractor_rotations = JSON.stringify(trial.distractor_rotations);
+    trial.distractor_type = JSON.stringify(trial.distractor_type);
+    $.post('save-data', trial)
 }
 
 function getCode(key) {
@@ -259,9 +260,9 @@ function getCRESP(rotation) {
 }
 
 function doNextState() {
-    if (window.trialNum >= nTrials) {
+    if (window.trial_num >= nTrials) {
         endExperiment();
-    } else if (window.trialNum % trialsPerBlock == 0) {
+    } else if (window.trial_num % trialsPerBlock == 0) {
         displayBreak();
     } else {
         displayTrial();
@@ -273,7 +274,7 @@ function getResponse(trial) {
     var trialTimeout = setTimeout(function() {
         clearCanvas();
         $(document).off();
-        window.trialNum += 1;
+        window.trial_num += 1;
         trial.response = "NA";
         trial.accuracy = false;
         trial.reaction_time = "NA"
@@ -289,7 +290,7 @@ function getResponse(trial) {
             $(document).off();
             clearTimeout(trialTimeout);
             clearCanvas();
-            window.trialNum += 1;
+            window.trial_num += 1;
             trial.response = getCode(e.keyCode);
             trial.accuracy = trial.response == trial.correct_response;
             trial.reaction_time = rtEnd - rtStart;
@@ -320,7 +321,7 @@ function displayTrial() {
     var stimuli = generateStimuli();
 
     var trial = {};
-    trial.trialNum = window.trialNum;
+    trial.trial_num = window.trial_num;
     trial.timestamp = Date.now();
     trial.target_color = (stimuli[0][0] == window.t_blue_image) ? "blue" : "black";
     trial.target_loc_x = locations[0][0];
@@ -343,7 +344,7 @@ function displayTrial() {
 }
 
 function startExperiment() {
-    window.trialNum = 0;
+    window.trial_num = 0;
     displayTrial();
 }
 
@@ -351,17 +352,12 @@ function endExperiment() {
     clearCanvas();
     writeCenterText(['Saving the data, please wait a moment...'])
     setInterval(function() {
-        $.post('save-data', {'data': JSON.stringify(window.subject_data)}, function(response) {
-            window.location.href = "https://app.prolific.co/submissions/complete?cc=517DF314";
-        })
-    }, 1000);
-    setTimeout(function() {
         window.location.href = "https://app.prolific.co/submissions/complete?cc=517DF314";
-    }, 10000)
+    }, 1000);
 }
 
 function progress() {
-    var newWidth = Math.max(5, (window.trialNum / nTrials) * 100)
+    var newWidth = Math.max(5, (window.trial_num / nTrials) * 100)
     $("#progressBar").css({'width': newWidth})
 }
 
