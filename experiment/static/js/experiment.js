@@ -199,6 +199,7 @@ function checkDistance(x1, y1, x2, y2) {
 }
 
 function generateLocations() {
+    console.log('generate');
     var i = 0;
     var xs = [getRandInt(100, 500) - 30];
     var ys = [getRandInt(100, 500) - 30];
@@ -206,8 +207,12 @@ function generateLocations() {
     while (locations.length < setSize) {
         i += 1;
         if (i >= 50) {
-            console.log('starting over')
+            console.log('starting over');
+            console.log(xs);
+            console.log(ys);
             locations = [[xs[0], ys[0]]];
+            xs = xs[0];
+            ys = ys[0];
             i = 0;
         }
         var newx = getRandInt(100, 500) - 30;
