@@ -206,7 +206,6 @@ function generateLocations() {
     while (locations.length < setSize) {
         counter += 1;
         if (counter >= 50) {
-            console.log('starting over');
             locations = [[xs[0], ys[0]]];
             xs = [xs[0]];
             ys = [ys[0]];
@@ -216,7 +215,7 @@ function generateLocations() {
         var newy = getRandInt(100, 500) - 30;
         var badLoc = false
         for (i=0; i<locations.length; i++) {
-            if (checkDistance(locations[i][0], locations[i][1], newx, newy) < 200) {
+            if (checkDistance(locations[i][0], locations[i][1], newx, newy) < 100) {
                 badLoc = true
                 break
             }
