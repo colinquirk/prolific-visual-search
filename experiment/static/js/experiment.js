@@ -195,6 +195,7 @@ function getRandInt(min, max) {
 }
 
 function checkDistance(x1, y1, x2, y2) {
+    console.log('check');
     return Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2))
 }
 
@@ -205,6 +206,7 @@ function generateLocations() {
     var ys = [getRandInt(100, 500) - 30];
     var locations = [[xs[0], ys[0]]];
     while (locations.length < setSize) {
+        console.log(i);
         i += 1;
         if (i >= 50) {
             console.log('starting over');
