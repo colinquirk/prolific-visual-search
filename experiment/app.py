@@ -21,8 +21,7 @@ def insert_data(pid, **kwargs):
 @app.route('/', methods=['GET'])
 def home():
     session['subject_id'] = request.args.get('PROLIFIC_PID')
-    if session['subject_id'] is not None and len(session['subject_id']) == 24:
-        insert_data(session['subject_id'], "")
+    if len(session['subject_id']) == 24:
         return redirect(url_for('consent'))
     else:
         error_text = ('Could not find a valid Prolific ID in the url. '
