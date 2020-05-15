@@ -53,7 +53,6 @@ def save_data():
         if form['reaction_time'] == "":
             form['reaction_time'] = None
 
-        print(form)
         insert_data(session['subject_id'], **form)
     except KeyError:
         error_text = ("Couldn't save your data."
