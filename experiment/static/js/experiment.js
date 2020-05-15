@@ -1,4 +1,4 @@
-nTrials = 600;
+nTrials = 500;
 trialsPerBlock = 50;
 setSize = 6;
 
@@ -220,7 +220,6 @@ function generateLocations() {
             ys.push(newy);
         }
         if (i >= 200) {
-            console.log('bad');
             locations = [[xs[0], ys[0]]];
             i = 0;
         }
