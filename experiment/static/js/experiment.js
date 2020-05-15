@@ -200,13 +200,13 @@ function checkDistance(x1, y1, x2, y2) {
 
 function generateLocations() {
     var i = 0;
-    var xs = [getRandInt(100, 500)];
-    var ys = [getRandInt(100, 500)];
+    var xs = [getRandInt(100, 500) - 30];
+    var ys = [getRandInt(100, 500) - 30];
     var locations = [[xs[0], ys[0]]];
     while (locations.length < setSize) {
         i += 1;
-        var newx = getRandInt(100, 500);
-        var newy = getRandInt(100, 500);
+        var newx = getRandInt(100, 500) - 30;
+        var newy = getRandInt(100, 500) - 30;
         var badLoc = false
         for (i=0; i<locations.length; i++) {
             if (checkDistance(locations[i][0], locations[i][1], newx, newy) < 150) {
