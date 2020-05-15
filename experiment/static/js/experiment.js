@@ -168,7 +168,6 @@ function instructions() {
 }
 
 function generateStimuli() {
-    console.log("stimuli");
     var possible_rotations = [0, 90, 180, 270];
     var possible_targets = [window.t_image, window.t_blue_image];
     var possible_distractors = [window.l1_image, window.l2_image];
@@ -200,18 +199,22 @@ function checkDistance(x1, y1, x2, y2) {
 }
 
 function generateLocations() {
-    console.log('generate');
     var i = 0;
     var xs = [getRandInt(100, 500) - 30];
     var ys = [getRandInt(100, 500) - 30];
     var locations = [[xs[0], ys[0]]];
     while (locations.length < setSize) {
         i += 1;
+        if (i >= 50) {
+            console.log('starting over')
+            locations = [[xs[0], ys[0]]];
+            i = 0;
+        }
         var newx = getRandInt(100, 500) - 30;
         var newy = getRandInt(100, 500) - 30;
         var badLoc = false
         for (i=0; i<locations.length; i++) {
-            if (checkDistance(locations[i][0], locations[i][1], newx, newy) < 150) {
+            if (checkDistance(locations[i][0], locations[i][1], newx, newy) < 200) {
                 badLoc = true
                 break
             }
@@ -221,16 +224,11 @@ function generateLocations() {
             xs.push(newx);
             ys.push(newy);
         }
-        if (i >= 200) {
-            locations = [[xs[0], ys[0]]];
-            i = 0;
-        }
     }
     return [xs, ys]
 }
 
 function saveData(trial) {
-    console.log('save');
     window.subject_data.push(trial);
     $.post('save-data', {'data': JSON.stringify(window.subject_data)})
 }
@@ -261,19 +259,15 @@ function getCRESP(rotation) {
 
 function doNextState() {
     if (window.trialNum >= nTrials) {
-        console.log("end");
         endExperiment();
     } else if (window.trialNum % trialsPerBlock == 0) {
-        console.log("break")
         displayBreak();
     } else {
-        console.log("trial")
         displayTrial();
     }
 }
 
 function getResponse(trial) {
-    console.log('get response')
     var rtStart = new Date();
     var trialTimeout = setTimeout(function() {
         clearCanvas();
@@ -289,7 +283,6 @@ function getResponse(trial) {
 
     $(document).keydown(function(e) {
         if ([37, 38, 39, 40, 65, 68, 83, 87].includes(e.keyCode)) {
-            console.log('response seen')
             var rtEnd = new Date()
             e.preventDefault();
             $(document).off();
