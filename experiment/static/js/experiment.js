@@ -351,11 +351,11 @@ function endExperiment() {
     writeCenterText(['Saving the data, please wait a moment...'])
     setInterval(function() {
         $.post('save-data', {'data': JSON.stringify(window.subject_data)}, function(response) {
-            window.location.href = "https://app.prolific.co/submissions/complete?cc=642EC0D2";
+            window.location.href = "https://app.prolific.co/submissions/complete?cc=517DF314";
         })
     }, 1000);
     setTimeout(function() {
-        window.location.href = "https://app.prolific.co/submissions/complete?cc=642EC0D2";
+        window.location.href = "https://app.prolific.co/submissions/complete?cc=517DF314";
     }, 10000)
 }
 
