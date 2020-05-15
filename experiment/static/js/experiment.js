@@ -271,6 +271,7 @@ function getResponse(trial) {
     var rtStart = new Date();
     var trialTimeout = setTimeout(function() {
         clearCanvas();
+        $(document).off();
         window.trialNum += 1;
         trial.response = "NA";
         trial.accuracy = false;
