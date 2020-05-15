@@ -4,6 +4,7 @@ from .app import db
 class Trial(db.Model):
     __tablename__ = 'participants'
 
+    primary_key = db.Column(db.Integer, primary_key=True)
     pid = db.Column(db.String())
     trial_num = db.Column(db.Integer())
     timestamp = db.Column(db.Integer())
