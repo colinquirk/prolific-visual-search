@@ -7,7 +7,7 @@ class Trial(db.Model):
     primary_key = db.Column(db.Integer, primary_key=True)
     pid = db.Column(db.String())
     trial_num = db.Column(db.Integer())
-    timestamp = db.Column(db.Integer())
+    timestamp = db.Column(db.BigInteger())
     target_color = db.Column(db.String())
     target_loc_x = db.Column(db.Integer())
     target_loc_y = db.Column(db.Integer())
