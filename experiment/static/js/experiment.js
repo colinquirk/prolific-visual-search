@@ -275,9 +275,9 @@ function getResponse(trial) {
         clearCanvas();
         $(document).off();
         window.trial_num += 1;
-        trial.response = null;
+        trial.response = "";
         trial.accuracy = false;
-        trial.reaction_time = null;
+        trial.reaction_time = "";
         saveData(trial);
         progress();
         doNextState();
