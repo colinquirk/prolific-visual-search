@@ -195,26 +195,21 @@ function getRandInt(min, max) {
 }
 
 function checkDistance(x1, y1, x2, y2) {
-    console.log('check');
     return Math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2))
 }
 
 function generateLocations() {
-    console.log('generate');
     var counter = 0;
     var xs = [getRandInt(100, 500) - 30];
     var ys = [getRandInt(100, 500) - 30];
     var locations = [[xs[0], ys[0]]];
     while (locations.length < setSize) {
-        console.log(counter);
         counter += 1;
         if (counter >= 50) {
             console.log('starting over');
-            console.log(xs);
-            console.log(ys);
             locations = [[xs[0], ys[0]]];
-            xs = xs[0];
-            ys = ys[0];
+            xs = [xs[0]];
+            ys = [ys[0]];
             counter = 0;
         }
         var newx = getRandInt(100, 500) - 30;
