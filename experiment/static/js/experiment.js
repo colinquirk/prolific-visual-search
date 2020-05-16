@@ -66,6 +66,7 @@ function responseInstruct() {
         'If the top of the "T" is pointed to the left, you would press the left arrow key.',
         'Alternatively, you can use W (up), A (left), S (down), and D (right).',
         'Sometimes the "T" will be blue in order to help you find it.',
+        'Press a key regardless of the color of the T.',
         "If you don't respond quickly enough the trial will time out.",
         'Please respond as fast as possible.',
         'Press space to continue.']);
@@ -260,6 +261,7 @@ function getCRESP(rotation) {
 }
 
 function doNextState() {
+    window.trial_num += 1;
     if (window.trial_num >= nTrials) {
         endExperiment();
     } else if (window.trial_num % trialsPerBlock == 0) {
@@ -274,7 +276,6 @@ function getResponse(trial) {
     var trialTimeout = setTimeout(function() {
         clearCanvas();
         $(document).off();
-        window.trial_num += 1;
         trial.response = "";
         trial.accuracy = false;
         trial.reaction_time = "";
@@ -290,7 +291,6 @@ function getResponse(trial) {
             $(document).off();
             clearTimeout(trialTimeout);
             clearCanvas();
-            window.trial_num += 1;
             trial.response = getCode(e.keyCode);
             trial.accuracy = trial.response == trial.correct_response;
             trial.reaction_time = rtEnd - rtStart;
@@ -353,7 +353,7 @@ function endExperiment() {
     writeCenterText(['Saving the data, please wait a moment...'])
     setInterval(function() {
         window.location.href = "https://app.prolific.co/submissions/complete?cc=517DF314";
-    }, 1000);
+    }, 2000);
 }
 
 function progress() {
